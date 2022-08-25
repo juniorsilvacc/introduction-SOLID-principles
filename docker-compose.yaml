@@ -1,0 +1,19 @@
+version: '3.9'
+services:
+
+  postgres:
+    image: 'postgres:alpine'
+
+    # Porta padrão
+    ports:
+      - '5432:5432'
+    network_mode: bridge # port available on localhost
+    container_name: database_api_solid
+
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_DB: 'api_solid'
+
+    volumes:
+      - ./initdb:/docker-entrypoint-initdb.d

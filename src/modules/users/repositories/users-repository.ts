@@ -3,6 +3,7 @@ import { User } from '../models/user';
 
 interface IUsersRepository {
   create(data: CreateUserDTO): Promise<User>;
+  findByEmail(email: string): Promise<User | null>;
 }
 
 export { IUsersRepository };

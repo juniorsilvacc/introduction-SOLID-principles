@@ -13,6 +13,16 @@ class UserRepository implements IUsersRepository {
     this.repository = client;
   }
 
+  async findUsers(): Promise<User[]> {
+    const { rows } = await this.repository.query('SELECT * FROM users');
+
+    if (rows.length > 0) {
+      return rows;
+    }
+
+    return rows;
+  }
+
   async findByEmail(email: string): Promise<User | null> {
     const { rows } = await this.repository.query(
       'SELECT * FROM users WHERE email = $1 LIMIT 1',

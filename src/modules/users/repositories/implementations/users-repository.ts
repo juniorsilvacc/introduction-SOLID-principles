@@ -13,6 +13,10 @@ class UserRepository implements IUsersRepository {
     this.repository = client;
   }
 
+  async deleteUser(id: string): Promise<void> {
+    await this.repository.query('DELETE FROM users WHERE id = $1', [id]);
+  }
+
   async findByUser(id: string): Promise<User | null> {
     const { rows } = await this.repository.query(
       'SELECT * FROM users WHERE id = $1 LIMIT 1',

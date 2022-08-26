@@ -1,12 +1,12 @@
-import { AppError } from '../../../config/errors/app-error';
-import { User } from '../models/user';
-import { IUsersRepository } from '../repositories/users-repository';
+import { AppError } from '../../../../config/errors/app-error';
+import { User } from '../../models/user';
+import { IUsersRepository } from '../../repositories/users-repository';
 
 interface IRequest {
   id: string;
 }
 
-class ShowUserService {
+class ShowUserUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
   async execute({ id }: IRequest): Promise<User | null> {
@@ -20,4 +20,4 @@ class ShowUserService {
   }
 }
 
-export { ShowUserService };
+export { ShowUserUseCase };

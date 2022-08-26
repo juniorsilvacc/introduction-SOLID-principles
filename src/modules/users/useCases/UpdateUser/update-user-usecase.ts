@@ -1,6 +1,6 @@
-import { AppError } from '../../../config/errors/app-error';
-import { User } from '../models/user';
-import { IUsersRepository } from '../repositories/users-repository';
+import { AppError } from '../../../../config/errors/app-error';
+import { User } from '../../models/user';
+import { IUsersRepository } from '../../repositories/users-repository';
 
 interface IRequest {
   id: string;
@@ -10,7 +10,7 @@ interface IRequest {
   registry: string;
 }
 
-class UpdateUserService {
+class UpdateUserUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
   async execute({
@@ -43,4 +43,4 @@ class UpdateUserService {
   }
 }
 
-export { UpdateUserService };
+export { UpdateUserUseCase };

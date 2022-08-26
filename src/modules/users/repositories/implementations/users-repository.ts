@@ -1,5 +1,4 @@
 import { Client } from 'pg';
-
 import { IUsersRepository } from '../users-repository';
 import { v4 as uuidV4 } from 'uuid';
 import { User } from '../../models/user';
@@ -25,12 +24,6 @@ class UserRepository implements IUsersRepository {
       'UPDATE users SET "name" = $1, "username" = $2, "email" = $3, "registry" = $4 WHERE "id" = $5',
       [name, username, email, registry, id],
     );
-
-    // if (rows.length > 0) {
-    //   return rows[0];
-    // } else {
-    //   return null;
-    // }
   }
 
   async deleteUser(id: string): Promise<void> {

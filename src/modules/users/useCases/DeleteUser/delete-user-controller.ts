@@ -1,15 +1,15 @@
 import { Request, Response } from 'express';
-import { UserRepository } from '../repositories/implementations/users-repository';
-import { DeleteUserService } from '../services/delete-user-service';
+import { UserRepository } from '../../repositories/implementations/users-repository';
+import { DeleteUserUseCase } from './delete-user-usecase';
 
 class DeleteUserController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
 
     const usersImplementations = new UserRepository();
-    const deleteUserService = new DeleteUserService(usersImplementations);
+    const deleteUserUseCase = new DeleteUserUseCase(usersImplementations);
 
-    await deleteUserService.execute({ id });
+    await deleteUserUseCase.execute({ id });
 
     return response.status(204).json();
   }

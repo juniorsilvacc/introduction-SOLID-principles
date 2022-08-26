@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { UserRepository } from '../repositories/implementations/users-repository';
-import { UpdateUserService } from '../services/update-user-service';
+import { UserRepository } from '../../repositories/implementations/users-repository';
+import { UpdateUserUseCase } from './update-user-usecase';
 
 class UpdateUserController {
   async handle(request: Request, response: Response): Promise<Response> {
@@ -8,9 +8,9 @@ class UpdateUserController {
     const { name, username, email, registry } = request.body;
 
     const usersImplementations = new UserRepository();
-    const updateUserService = new UpdateUserService(usersImplementations);
+    const updateUserUseCase = new UpdateUserUseCase(usersImplementations);
 
-    const user = await updateUserService.execute({
+    const user = await updateUserUseCase.execute({
       id,
       name,
       username,

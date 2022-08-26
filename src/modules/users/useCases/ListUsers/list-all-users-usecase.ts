@@ -1,7 +1,7 @@
-import { User } from '../models/user';
-import { IUsersRepository } from '../repositories/users-repository';
+import { User } from '../../models/user';
+import { IUsersRepository } from '../../repositories/users-repository';
 
-class ListAllUsersService {
+class ListAllUsersUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
   async execute(): Promise<User[]> {
@@ -11,4 +11,4 @@ class ListAllUsersService {
   }
 }
 
-export { ListAllUsersService };
+export { ListAllUsersUseCase };

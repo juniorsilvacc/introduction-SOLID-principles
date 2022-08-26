@@ -1,9 +1,9 @@
-import { AppError } from '../../../config/errors/app-error';
-import { CreateUserDTO } from '../dtos/create-user-dto';
-import { User } from '../models/user';
-import { IUsersRepository } from '../repositories/users-repository';
+import { AppError } from '../../../../config/errors/app-error';
+import { CreateUserDTO } from '../../dtos/create-user-dto';
+import { User } from '../../models/user';
+import { IUsersRepository } from '../../repositories/users-repository';
 
-class CreateUserService {
+class CreateUserUseCase {
   constructor(private readonly usersRepository: IUsersRepository) {}
 
   async execute({
@@ -29,4 +29,4 @@ class CreateUserService {
   }
 }
 
-export { CreateUserService };
+export { CreateUserUseCase };

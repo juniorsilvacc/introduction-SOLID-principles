@@ -1,12 +1,13 @@
 import { Request, Response } from 'express';
-import { UserRepository } from '../../repositories/implementations/users-repository';
+import { PostgresUsersRepository } from '../../repositories/implementations/postgres-users-repository';
+
 import { DeleteUserUseCase } from './delete-user-usecase';
 
 class DeleteUserController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
 
-    const usersImplementations = new UserRepository();
+    const usersImplementations = new PostgresUsersRepository();
     const deleteUserUseCase = new DeleteUserUseCase(usersImplementations);
 
     await deleteUserUseCase.execute({ id });

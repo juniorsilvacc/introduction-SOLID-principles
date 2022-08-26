@@ -1,13 +1,18 @@
 import { Request, Response } from 'express';
-import { UserRepository } from '../../repositories/implementations/users-repository';
+import { MailProvider } from '../../../../shared/providers/mail/implementations/mail-provider-implementations';
+import { PostgresUsersRepository } from '../../repositories/implementations/postgres-users-repository';
 import { CreateUserUseCase } from './create-user-usecase';
 
 class CreateUserController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { name, username, email, registry } = request.body;
 
-    const usersImplementations = new UserRepository();
-    const createUserUseCase = new CreateUserUseCase(usersImplementations);
+    const usersImplementations = new PostgresUsersRepository();
+    const mailProvider = new MailProvider();
+    const createUserUseCase = new CreateUserUseCase(
+      usersImplementations,
+      mailProvider,
+    );
 
     const user = await createUserUseCase.execute({
       name,

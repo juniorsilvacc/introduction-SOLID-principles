@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { UserRepository } from '../../repositories/implementations/users-repository';
+import { PostgresUsersRepository } from '../../repositories/implementations/postgres-users-repository';
 import { UpdateUserUseCase } from './update-user-usecase';
 
 class UpdateUserController {
@@ -7,7 +7,7 @@ class UpdateUserController {
     const { id } = request.params;
     const { name, username, email, registry } = request.body;
 
-    const usersImplementations = new UserRepository();
+    const usersImplementations = new PostgresUsersRepository();
     const updateUserUseCase = new UpdateUserUseCase(usersImplementations);
 
     const user = await updateUserUseCase.execute({

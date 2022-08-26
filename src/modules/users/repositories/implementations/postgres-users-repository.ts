@@ -6,7 +6,7 @@ import { client } from '../../../../shared/database/db';
 import { CreateUserDTO } from '../../dtos/create-user-dto';
 import { UpdateUserDTO } from '../../dtos/update-user-dto';
 
-class UserRepository implements IUsersRepository {
+class PostgresUsersRepository implements IUsersRepository {
   private repository: Client;
 
   constructor() {
@@ -91,4 +91,4 @@ class UserRepository implements IUsersRepository {
   }
 }
 
-export { UserRepository };
+export { PostgresUsersRepository };

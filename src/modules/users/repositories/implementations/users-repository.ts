@@ -5,12 +5,32 @@ import { v4 as uuidV4 } from 'uuid';
 import { User } from '../../models/user';
 import { client } from '../../../../shared/database/db';
 import { CreateUserDTO } from '../../dtos/create-user-dto';
+import { UpdateUserDTO } from '../../dtos/update-user-dto';
 
 class UserRepository implements IUsersRepository {
   private repository: Client;
 
   constructor() {
     this.repository = client;
+  }
+
+  async updateUser({
+    id,
+    name,
+    username,
+    email,
+    registry,
+  }: UpdateUserDTO): Promise<void> {
+    await this.repository.query(
+      'UPDATE users SET "name" = $1, "username" = $2, "email" = $3, "registry" = $4 WHERE "id" = $5',
+      [name, username, email, registry, id],
+    );
+
+    // if (rows.length > 0) {
+    //   return rows[0];
+    // } else {
+    //   return null;
+    // }
   }
 
   async deleteUser(id: string): Promise<void> {

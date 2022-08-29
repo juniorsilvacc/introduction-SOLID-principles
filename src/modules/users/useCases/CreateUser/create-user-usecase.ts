@@ -22,14 +22,14 @@ class CreateUserUseCase {
       throw new AppError(`Email ${email} already exists`);
     }
 
-    const user = this.usersRepository.create({
+    const user = await this.usersRepository.create({
       name,
       username,
       email,
       registry,
     });
 
-    this.mailProvider.sendMail({
+    await this.mailProvider.sendMail({
       to: {
         name,
         email,

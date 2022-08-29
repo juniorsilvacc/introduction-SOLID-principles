@@ -12,7 +12,7 @@ class DeleteUserUseCase {
     const user = await this.usersRepository.findByUser(id);
 
     if (!user) {
-      throw new AppError('User does not exists');
+      throw new AppError('User does not exists', 404);
     }
 
     await this.usersRepository.deleteUser(id);

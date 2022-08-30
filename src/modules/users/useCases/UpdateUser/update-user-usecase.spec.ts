@@ -41,4 +41,26 @@ describe('Update User', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
+  it('should be able to update', async () => {
+    const user = await inMemoryUsersRepository.create({
+      name: 'Name Test',
+      username: 'usernametest',
+      email: 'test@example.com',
+      registry: '12312312332',
+    });
+
+    await updateUserUseCase.execute({
+      id: user.id,
+      name: 'Name Test Update',
+      username: 'usernametest Update',
+      email: 'update@example.com',
+      registry: '12312312332',
+    });
+
+    expect(user.name).toBe('Name Test Update');
+    expect(user.username).toBe('usernametest Update');
+    expect(user.email).toBe('update@example.com');
+    expect(user.registry).toBe('12312312332');
+  });
 });

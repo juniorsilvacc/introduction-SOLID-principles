@@ -1,3 +1,4 @@
+import { AppError } from '../../../../config/errors/app-error';
 import { InMemoryUsersRepository } from '../../repositories/in-memory/in-memory-users-repository';
 import { ShowUserUseCase } from './show-user-usecase';
 
@@ -21,5 +22,13 @@ describe('Show User', () => {
     const show = await showUserUseCase.execute({ id: user.id });
 
     expect(show).toBe(user);
+  });
+
+  it('should not be able to show a user does not exists', async () => {
+    await expect(
+      showUserUseCase.execute({
+        id: 'non-existent',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });

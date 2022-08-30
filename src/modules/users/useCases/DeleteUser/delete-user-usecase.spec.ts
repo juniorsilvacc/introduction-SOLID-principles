@@ -18,4 +18,17 @@ describe('Delete User', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
+  test('shold delete a user', async () => {
+    const user = await inMemoryUsersRepository.create({
+      name: 'Name Test',
+      username: 'usernametest',
+      email: 'test@example.com',
+      registry: '12312312332',
+    });
+
+    const deleteUser = await deleteUserUseCase.execute(user);
+
+    expect(deleteUser).toBeUndefined();
+  });
 });

@@ -30,7 +30,7 @@ class PostgresUsersRepository implements IUsersRepository {
     await this.repository.query('DELETE FROM users WHERE id = $1', [id]);
   }
 
-  async findByUser(id: string): Promise<User | null> {
+  async findByUser(id: string): Promise<User | undefined> {
     const { rows } = await this.repository.query(
       'SELECT * FROM users WHERE id = $1 LIMIT 1',
       [id],
@@ -40,7 +40,7 @@ class PostgresUsersRepository implements IUsersRepository {
       return rows[0];
     }
 
-    return null;
+    return undefined;
   }
 
   async findUsers(): Promise<User[]> {
@@ -53,7 +53,7 @@ class PostgresUsersRepository implements IUsersRepository {
     return rows;
   }
 
-  async findByEmail(email: string): Promise<User | null> {
+  async findByEmail(email: string): Promise<User | undefined> {
     const { rows } = await this.repository.query(
       'SELECT * FROM users WHERE email = $1 LIMIT 1',
       [email],
@@ -63,7 +63,7 @@ class PostgresUsersRepository implements IUsersRepository {
       return rows[0];
     }
 
-    return null;
+    return undefined;
   }
 
   async create({

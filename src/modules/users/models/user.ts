@@ -1,7 +1,7 @@
 import { v4 as uuidV4 } from 'uuid';
 
 class User {
-  public id?: string;
+  public id: string;
   public name: string;
   public username: string;
   public email: string;

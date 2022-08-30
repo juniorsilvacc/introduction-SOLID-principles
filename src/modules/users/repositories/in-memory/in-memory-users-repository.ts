@@ -47,11 +47,11 @@ class InMemoryUsersRepository implements IUsersRepository {
   }
 
   async deleteUser(id: string): Promise<void> {
-    throw new Error('Method not implemented.');
+    this.users.find(user => user.id === id);
   }
 
   async updateUser(data: UpdateUserDTO): Promise<void> {
-    throw new Error('Method not implemented.');
+    this.users;
   }
 }
 

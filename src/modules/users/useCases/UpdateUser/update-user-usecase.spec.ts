@@ -22,4 +22,23 @@ describe('Update User', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
+  it('should not be able to switch to another user email if it already exists', async () => {
+    await inMemoryUsersRepository.create({
+      name: 'Name Test',
+      username: 'usernametest',
+      email: 'test@example.com',
+      registry: '12312312332',
+    });
+
+    expect(
+      updateUserUseCase.execute({
+        id: '1410291283912831',
+        name: 'Name Test',
+        username: 'usernametest',
+        email: 'test@example.com',
+        registry: '12312312332',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });

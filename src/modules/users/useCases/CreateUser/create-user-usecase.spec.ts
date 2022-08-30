@@ -1,3 +1,4 @@
+import { AppError } from '../../../../config/errors/app-error';
 import { InMemoryMailProvider } from '../../../../shared/providers/mail/in-memory/in-memory-mail-provider';
 import { InMemoryUsersRepository } from '../../repositories/in-memory/in-memory-users-repository';
 import { CreateUserUseCase } from './create-user-usecase';
@@ -28,5 +29,23 @@ describe('Create User', () => {
 
     expect(user).toHaveProperty('id');
     expect(sendMail).toHaveBeenCalled();
+  });
+
+  test('shold not be able to create a new user with the same email', async () => {
+    await createUserUseCase.execute({
+      name: 'Name Test',
+      username: 'usernametest',
+      email: 'test@example.com',
+      registry: '12312312332',
+    });
+
+    expect(
+      createUserUseCase.execute({
+        name: 'Name Test',
+        username: 'usernametest',
+        email: 'test@example.com',
+        registry: '12312312332',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });

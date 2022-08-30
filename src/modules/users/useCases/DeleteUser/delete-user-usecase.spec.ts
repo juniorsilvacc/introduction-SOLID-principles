@@ -27,7 +27,7 @@ describe('Delete User', () => {
       registry: '12312312332',
     });
 
-    const deleteUser = await deleteUserUseCase.execute(user);
+    const deleteUser = await deleteUserUseCase.execute({ id: user.id });
 
     expect(deleteUser).toBeUndefined();
   });
